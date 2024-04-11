@@ -1,2 +1,2 @@
-# TCC Sistema de restaurante Villas Boas
- Meu TCC da etec lauro gomes, onde resolvemos ajudar um restaurante da região
+# TCC Sistema de restaurante Villas Boas.
+ Meu TCC da etec lauro gomes, onde resolvemos ajudar um restaurante da região, pois, o mesmo obtinha um problema na produção, em relação ao atendimento e administração dos pratos, tivemos como objetivo principal, criar um site (responsivo) no qual o administrador, gerente do restaurante, posssa alterar os pratos servidos todo dia e consiga ter um sistema de compras automatizado, pois, anteriormente o restaurante utiliza de outros meios de comunicação para realizar as entregas, algo que se tornou inversamente proporcional a produção.
