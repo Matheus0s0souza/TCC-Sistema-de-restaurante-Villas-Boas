@@ -2,26 +2,16 @@
 //define('BASE_PATH', __DIR__);
 class clsIngredientes{
 
-private $idingre; 
 private $ingre;
 private $gramas;
 private $descricao;
-
+///
+private $img
 
 private $conexao; // conexao com o database
 
 public function __construct($conexao) { 
     $this->conexao = $conexao;
-}
-
-//--------------------------------------------------------
-public function getIdIngre()
-{
-    return $this->idingre;
-}
-public function setIdIngre($idIg)
-{
-    $this->idingre = $idIg;
 }
 
 //--------------------------------------------------------
@@ -55,6 +45,16 @@ public function setdescricao($desc)
     $this->descricao = $desc;
 }
 //--------------------------------------------------------
+///
+public function getimg()
+{
+    return $this->img;
+}
+public function setimg($img)
+{
+    $this->img = $img;
+}
+//--------------------------------------------------------
 
 //------------------registro------------------------------
 
@@ -63,10 +63,12 @@ public function Registrar()
 
     //include "conexao.php";
     try{
-        $comando=$this->conexao->prepare("insert into tb_ingredientes (nm_ingr, gra_ingr, desc_ingr) values (?,?,?)");
+        $comando=$this->conexao->prepare("insert into tb_ingredientes (nm_ingr, gra_ingr, desc_ingr, pra_img) values (?,?,?,?)");
         $comando->bindParam(1,$this->ingre);
         $comando->bindParam(2,$this->gramas);
         $comando->bindParam(3,$this->descricao);
+        //
+        $comando->bindParam(4,$this->img);
 
         if($comando->execute())
         {
@@ -83,11 +85,14 @@ public function Registrar()
 //---------------------------verificar--------------------------------------------
 public function Consultar()
 {
+    //include "conexao.php";
+
         try
         {
-            $comando=$this->conexao->prepare("SELECT * FROM tb_ingredientes WHERE nm_ingr = ? or gra_ingr = ?;");
-            $comando->bindParam(1,$this->ingre);
-            $comando->bindParam(2,$this->gramas);
+            //$comando=$this->conexao->prepare("SELECT * FROM tb_ingredientes;");
+            $comando=$this->conexao->prepare("SELECT * FROM tb_ingredientes "); //WHERE nm_ingr = ? or gra_ingr = ?;");
+           // $comando->bindParam(1,$this->ingre);
+           // $comando->bindParam(2,$this->gramas);
 
             if($comando->execute())
             {
@@ -95,7 +100,9 @@ public function Consultar()
                 {
                     $Tabela     = $comando->fetchAll(PDO::FETCH_ASSOC);
                     $retorno    = json_encode($Tabela);
-
+                   // var_dump($retorno);
+                    //exit;
+                    
                 }
                 else
                 {
@@ -109,23 +116,6 @@ public function Consultar()
         }
         return $retorno;
     }
-//--------------------------------- deletar -----------------------------------------
-
-public function Deletar() {
-    try {
-        $comando = $this->conexao->prepare("DELETE FROM tb_ingredientes WHERE id_ingr = ?");
-        $comando->bindParam(1, $this->idingre);
-
-        if ($comando->execute()) 
-        {
-            $retorno = "deletado";
-        } 
-    } 
-    catch (PDOException $erro) 
-    {
-        $retorno = $erro->getMessage();
-    }
-    return $retorno;
 }
-}
+
 ?>

@@ -1,0 +1,2 @@
+Coloquei o button de aqruivo(foto) no html, mudei o controle e a classe de acordo com a nescessidade lógica do novo botão, não editei o ajax
+nem o Mysql lembrando que ainda é nescessario criar a linha do pra_img
